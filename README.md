@@ -5,7 +5,7 @@
 Name | Student Number
 ------------ | -------------
 Thomas Fabian | N10582835
-Daniel Edwards |
+Daniel Edwards | N5538815
 Samuel Conway | 
 Matt Maag |
 
