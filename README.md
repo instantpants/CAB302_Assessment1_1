@@ -12,7 +12,7 @@ Matt Maag |
 
 ## Git cheatsheet
 ### Pull latest changes
-* `cd` into the MiningAI folder
+* `cd` into the CAB302_Assessment1 folder
 * `git pull origin`
 
 ### Push your changes
