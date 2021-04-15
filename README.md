@@ -7,7 +7,7 @@ Name | Student Number
 Thomas Fabian | N10582835
 Daniel Edwards | N5538815
 Samuel Conway | N10413031
-Matt Maag |
+Matt Maag | N10462058
 
 
 ## Git cheatsheet
