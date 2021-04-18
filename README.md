@@ -17,6 +17,7 @@ Matt Maag | N10462058
 
 ### Push your changes
 * (branches stuff I can't remember off the top of my head)
-* `git add -A`
+* `git add -A` (add everything)
+* `git add <files>` (add only specific files)
 * `git commit -m 'your message here'`
 * `git push origin`
