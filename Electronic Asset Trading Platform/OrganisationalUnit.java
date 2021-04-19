@@ -4,9 +4,7 @@ import java.util.TreeMap;
  * This class stores info about an Organisational Unit and its resources
  *
  * @version 0
- * @see     User
- * @see     Asset
- * @see     Listing
+ * @see User
  */
 public class OrganisationalUnit {
     public String name;
@@ -16,7 +14,7 @@ public class OrganisationalUnit {
     /**
      * Creates a new Organisational Unit
      *
-     * @param   name    name of the OU
+     * @param name name of this OU
      */
     public OrganisationalUnit(String name) {
         this.name = name;
