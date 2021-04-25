@@ -1,3 +1,5 @@
+package Program;
+
 import java.time.Instant;
 import java.util.Date;
 
@@ -8,11 +10,11 @@ import java.util.Date;
  * @see Asset
  */
 public class Listing {
-    public boolean isBuying;
-    public Asset asset;
+    public final boolean isBuying;
+    public final Asset asset;
     public int quantity;
     public int price;
-    public OrganisationalUnit organisationalUnit;
+    public final OrganisationalUnit organisationalUnit;
     public Date date;
 
     /**

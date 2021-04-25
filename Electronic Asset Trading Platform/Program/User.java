@@ -1,3 +1,5 @@
+package Program;
+
 /**
  * This class stores info about a user
  *
@@ -21,9 +23,9 @@ public class User {
     }
 
     /**
-     * Generates a new Asset sell order
+     * Generates a new Program.Asset sell order
      *
-     * @param asset Asset to be listed
+     * @param asset Program.Asset to be listed
      * @param quantity quantity of assets to be listed
      * @param credits price per unit
      */
@@ -36,14 +38,15 @@ public class User {
      *
      * @param listing listing to be removed
      */
+    // may also want a separate UpdateListing()
     public void RemoveListing(Listing listing) {
 
     }
 
     /**
-     * Generates a new Asset buy order
+     * Generates a new Program.Asset buy order
      *
-     * @param asset Asset to be ordered
+     * @param asset Program.Asset to be ordered
      * @param quantity quantity of assets to be ordered
      * @param credits price per unit
      */

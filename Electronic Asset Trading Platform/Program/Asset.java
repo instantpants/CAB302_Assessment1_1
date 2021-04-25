@@ -1,17 +1,19 @@
+package Program;
+
 /**
- * This class stores info and methods relating to each Asset
+ * This class stores info and methods relating to each Program.Asset
  *
  * @version 0
  * @see Listing
  * @see OrganisationalUnit
  */
 public class Asset implements Comparable<Asset>{
-    public String name;
+    public final String name;
 
     /**
-     * Creates a new Asset
+     * Creates a new Program.Asset
      *
-     * @param name name of this Asset
+     * @param name name of this Program.Asset
      */
     public Asset(String name) {
         // should probably make a check that 'name' is a valid asset name

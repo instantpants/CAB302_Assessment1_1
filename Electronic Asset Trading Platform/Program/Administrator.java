@@ -1,5 +1,7 @@
+package Program;
+
 /**
- * This class extends on the User class, with added permissions/functionality
+ * This class extends on the Program.User class, with added permissions/functionality
  *
  * @version 0
  * @see User
