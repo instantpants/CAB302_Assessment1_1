@@ -1,4 +1,4 @@
-package Program;
+package Common;
 
 /**
  * This class stores info about a user

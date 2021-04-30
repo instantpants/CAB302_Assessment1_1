@@ -1,4 +1,4 @@
-package Program;
+package Common;
 
 /**
  * This class stores info and methods relating to each Program.Asset

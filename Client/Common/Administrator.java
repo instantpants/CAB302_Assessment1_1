@@ -1,4 +1,4 @@
-package Program;
+package Common;
 
 /**
  * This class extends on the Program.User class, with added permissions/functionality

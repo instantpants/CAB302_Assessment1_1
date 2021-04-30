@@ -1,4 +1,4 @@
-package Program;
+package Common;
 
 import java.time.Instant;
 import java.util.Date;
