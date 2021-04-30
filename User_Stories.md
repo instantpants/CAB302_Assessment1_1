@@ -9,7 +9,6 @@ IT Admin Team | ITAT
 System Administrator | SysAdmin
 IT Security Team | ITSec
 
-
 ### Friendly GUI
 As a user, I think it's important to have a nice, friendly GUI interface, 
 not a dusty old command line interface.
