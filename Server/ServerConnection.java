@@ -21,44 +21,44 @@ public class ServerConnection
             statement.executeUpdate("drop table if exists trade_history");
 
             statement.executeUpdate("CREATE TABLE users (" +
-                    "username STRING NOT NULL PRIMARY KEY, " +
-                    "password STRING NOT NULL, " +
-                    "account_type INT NOT NULL, " +
-                    "ou_name STRING NOT NULL" +
-                    ")"
+                    "username       TEXT    NOT NULL PRIMARY KEY, " +
+                    "password       TEXT    NOT NULL, " +
+                    "account_type   INT     NOT NULL, " +
+                    "ou_name        STRING  NOT NULL)"
             );
 
             statement.executeUpdate("CREATE TABLE ou (" +
-                    "ou_name STRING NOT NULL PRIMARY KEY" +
-                    "credits INT NOT NULL)"
+                    "ou_name        TEXT    NOT NULL PRIMARY KEY, " +
+                    "credits        INT     NOT NULL)"
             );
 
             statement.executeUpdate("CREATE TABLE assets (" +
-                    "asset_name STRING NOT NULL, " +
-                    "ou_name STRING NOT NULL," +
-                    "quantity INT NOT NULL" +
+                    "asset_name     TEXT    NOT NULL, " +
+                    "ou_name        TEXT    NOT NULL," +
+                    "quantity       INT     NOT NULL, " +
                     "" +
-                    "PRIMARY KEY(asset_name, ou_name)"
+                    "PRIMARY KEY(asset_name, ou_name))"
             );
 
             statement.executeUpdate("CREATE TABLE listings (" +
-                    "id INT NOT NULL IDENTITY PRIMARY KEY, " +
-                    "ou_name STRING NOT NULL, " +
-                    "date_added DATE NOT NULL" +
-                    "asset_name STRING NOT NULL" +
-                    "quantity INT NOT NULL" +
-                    "price INT NOT NULL" +
-                    "listing_type BIT NOT NULL)"
+                    "_id            INT     AUTO_INCREMENT PRIMARY KEY, " +
+                    "ou_name        TEXT    NOT NULL, " +
+                    "date_added     TEXT    NOT NULL, " +
+                    "asset_name     TEXT    NOT NULL, " +
+                    "quantity       INT     NOT NULL, " +
+                    "price          INT     NOT NULL, " +
+                    "listing_type   BIT     NOT NULL)"
             );
 
             statement.executeUpdate("CREATE TABLE trade_history (" +
-                    "invoice_number INT NOT NULL IDENTITY PRIMARY KEY, " +
-                    "ou_name STRING NOT NULL" +
-                    "date_sold DATE NOT NULL" +
-                    "asset_name STRING NOT NULL" +
-                    "quantity INT NOT NULL" +
-                    "price INT NOT NULL" +
-                    "listing_type BIT NOT NULL)");
+                    "_id            INT     AUTO_INCREMENT PRIMARY KEY, " +
+                    "ou_name        TEXT    NOT NULL, " +
+                    "date_sold      TEXT    NOT NULL, " +
+                    "asset_name     TEXT    NOT NULL, " +
+                    "quantity       INT     NOT NULL, " +
+                    "price          INT     NOT NULL, " +
+                    "listing_type   BIT     NOT NULL)"
+            );
 
             statement.executeUpdate("INSERT INTO users VALUES('root', 'pass', 0, 'IT')");
             statement.executeUpdate("INSERT INTO users VALUES('user', 'pass', 1, 'IT')");
