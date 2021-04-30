@@ -20,7 +20,7 @@ public class ServerConnection
             statement.executeUpdate("drop table if exists listings");
             statement.executeUpdate("drop table if exists trade_history");
 
-            statement.executeUpdate("create table users (" +
+            statement.executeUpdate("CREATE TABLE users (" +
                     "username STRING NOT NULL PRIMARY KEY, " +
                     "password STRING NOT NULL, " +
                     "account_type INT NOT NULL, " +
@@ -28,12 +28,12 @@ public class ServerConnection
                     ")"
             );
 
-            statement.executeUpdate("create table ou (" +
+            statement.executeUpdate("CREATE TABLE ou (" +
                     "ou_name STRING NOT NULL PRIMARY KEY" +
                     "credits INT NOT NULL)"
             );
 
-            statement.executeUpdate("create table assets (" +
+            statement.executeUpdate("CREATE TABLE assets (" +
                     "asset_name STRING NOT NULL, " +
                     "ou_name STRING NOT NULL," +
                     "quantity INT NOT NULL" +
@@ -41,7 +41,7 @@ public class ServerConnection
                     "PRIMARY KEY(asset_name, ou_name)"
             );
 
-            statement.executeUpdate("create table listings (" +
+            statement.executeUpdate("CREATE TABLE listings (" +
                     "id INT NOT NULL IDENTITY PRIMARY KEY, " +
                     "ou_name STRING NOT NULL, " +
                     "date_added DATE NOT NULL" +
@@ -51,7 +51,7 @@ public class ServerConnection
                     "listing_type BIT NOT NULL)"
             );
 
-            statement.executeUpdate("create table trade_history (" +
+            statement.executeUpdate("CREATE TABLE trade_history (" +
                     "invoice_number INT NOT NULL IDENTITY PRIMARY KEY, " +
                     "ou_name STRING NOT NULL" +
                     "date_sold DATE NOT NULL" +
@@ -60,11 +60,11 @@ public class ServerConnection
                     "price INT NOT NULL" +
                     "listing_type BIT NOT NULL)");
 
-            statement.executeUpdate("insert into users values('root', 'pass', 0, 'IT')");
-            statement.executeUpdate("insert into users values('user', 'pass', 1, 'IT')");
-            statement.executeUpdate("insert into users values('joe', 'blogs', 1, 'IT')");
+            statement.executeUpdate("INSERT INTO users VALUES('root', 'pass', 0, 'IT')");
+            statement.executeUpdate("INSERT INTO users VALUES('user', 'pass', 1, 'IT')");
+            statement.executeUpdate("INSERT INTO users VALUES('joe', 'blogs', 1, 'IT')");
 
-            ResultSet rs = statement.executeQuery("select * from users");
+            ResultSet rs = statement.executeQuery("SELECT * FROM users");
 
             while(rs.next()){
                 System.out.print("name: " + rs.getString("username") + "\t");
