@@ -1,8 +1,7 @@
 import javax.swing.*;
 import java.awt.Toolkit;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.sql.*;
 
 class LoginGUI extends JFrame
 {
@@ -48,24 +47,38 @@ class LoginGUI extends JFrame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
 
-        btnLogin.addActionListener(e -> {
+        btnLogin.addActionListener(event -> {
             String user = txtUsername.getText();
             String pass = txtPassword.getText();
+            Connection connection = null;
 
-            // Test functionality
-            if (user.equals("user") && pass.equals("pass")){
-                TradingPlatformGUI tradingPlatformGUI = new TradingPlatformGUI();
+            System.out.println(user + " " + pass);
+
+            try {
+                connection = DriverManager.getConnection("jdbc:sqlite:TradingPlatform.db");
+                Statement statement = connection.createStatement();
+                statement.setQueryTimeout(30);
+
+                PreparedStatement getUser = connection.prepareStatement("SELECT * FROM users WHERE username = ? AND password = ?");
+                getUser.setString(1, user);
+                getUser.setString(2, pass);
+                ResultSet res = getUser.executeQuery();
+
+                while (res.next()){
+                    System.out.println(res.getString("username"));
+                }
             }
-
-            /*
-            ''Database query here''
-
-            if (user exists in database){
-                MainMenu mainMenu = new MainMenu();
-            }else{
-                JOptionPane.showMessageDialog(null, "Wrong Username and or Password");
+            catch (SQLException e) {
+                System.err.println(e.getMessage());
             }
-            */
+            finally{
+                try {
+                    if (connection != null)
+                        connection.close();
+                }catch (SQLException e){
+                    System.err.println(e.getMessage());
+                }
+            }
         });
     }
 
