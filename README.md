@@ -5,18 +5,19 @@
 Name | Student Number
 ------------ | -------------
 Thomas Fabian | N10582835
-Daniel Edwards |
-Samuel Conway | 
-Matt Maag |
+Daniel Edwards | N5538815
+Samuel Conway | N10413031
+Matt Maag | N10462058
 
 
 ## Git cheatsheet
 ### Pull latest changes
-* `cd` into the MiningAI folder
+* `cd` into the CAB302_Assessment1 folder
 * `git pull origin`
 
 ### Push your changes
 * (branches stuff I can't remember off the top of my head)
-* `git add -A`
+* `git add -A` (add everything)
+* `git add <files>` (add only specific files)
 * `git commit -m 'your message here'`
 * `git push origin`
