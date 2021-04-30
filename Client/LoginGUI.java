@@ -45,24 +45,19 @@ class LoginGUI extends JFrame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
 
-        btnLogin.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                String user = txtUsername.getText();
-                String pass = txtPassword.getText();
+        btnLogin.addActionListener(e -> {
+            String user = txtUsername.getText();
+            String pass = txtPassword.getText();
 
-                /*
-                Database query here
+            /*
+            ''Database query here''
 
-                if (user exists){
-                    MainMenu mainMenu = new MainMenu();
-                }else{
-                    JOptionPane.showMessageDialog(null, "Wrong Username and or Password");
-                }
-                 */
+            if (user exists in database){
+                MainMenu mainMenu = new MainMenu();
+            }else{
+                JOptionPane.showMessageDialog(null, "Wrong Username and or Password");
             }
+            */
         });
     }
 }
