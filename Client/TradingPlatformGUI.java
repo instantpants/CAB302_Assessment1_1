@@ -1,70 +1,75 @@
+import Common.Database;
+
 import javax.swing.*;
-import javax.xml.transform.Result;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class TradingPlatformGUI extends JFrame
 {
     JPanel pnlTable;
     JPanel pnlNav;
     JButton btnRefresh;
+    JScrollPane scpListings;
     JTable tblListings;
 
 
     String[] columnNames = { "OU", "Asset Name", "Quantity", "Price", "Listing Type", "Date Added"};
 
-    public TradingPlatformGUI(){
+    public TradingPlatformGUI(ResultSet user){
         super("Electronic Asset Trading Platform");
 
         pnlTable = new JPanel();
         btnRefresh = new JButton("Refresh");
         tblListings = new JTable();
+        scpListings = new JScrollPane(tblListings);
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         setSize(800, 600);
         setLocation(screenSize.width/2 - 400, screenSize.height/2 - 300);
         pnlTable.setLayout(null);
 
+        tblListings.setBounds(20,20,700,500);
+
+        scpListings.setViewportView(tblListings);
+        pnlTable.add(tblListings);
+
         getContentPane().add(pnlTable);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
 
-        btnRefresh.addActionListener(e -> {
-            PopulateListings();
-        });
+        PopulateListings();
+
+        btnRefresh.addActionListener(e -> PopulateListings());
     }
 
     public void PopulateListings(){
-        Connection connection = null;
+        try (Connection connection = DriverManager.getConnection(Database.URL)) {
+            PreparedStatement getUser = connection.prepareStatement(Database.GetListingsQuery);
+            ResultSet rs = getUser.executeQuery();
 
-        try {
-            connection = DriverManager.getConnection("jdbc:sqlite:TradingPlatform.db");
-            Statement statement = connection.createStatement();
-            statement.setQueryTimeout(30);
-
-            ResultSet listings = statement.executeQuery("SELECT * FROM listings");
-
-            while (listings.next()) {
-
+            DefaultTableModel model = new DefaultTableModel();
+            for(String col:columnNames){
+                model.addColumn(col);
             }
 
+            // Loop listings
+            while (rs.next()) {
+                model.addRow(new Object[]{
+                        rs.getString("ou_name"),
+                        rs.getString("asset_name"),
+                        rs.getString("quantity"),
+                        rs.getString("price"),
+                        rs.getString("listing_type"),
+                        rs.getString("date_added")
+                });
+            }
+
+            tblListings.setModel(model);
+            setVisible(true);
         }
         catch (SQLException e) {
-            System.err.println(e.getMessage());
-        }
-        finally{
-            try {
-                if (connection != null)
-                    connection.close();
-            }catch (SQLException e){
-                System.err.println(e.getMessage());
-            }
+            System.out.println(e.getMessage());
         }
     }
 }

@@ -2,8 +2,9 @@ import javax.swing.*;
 import java.awt.Toolkit;
 import java.awt.Dimension;
 import java.sql.*;
+import Common.Database;
 
-class LoginGUI extends JFrame
+public class LoginGUI extends JFrame
 {
 
     JButton btnLogin;
@@ -47,39 +48,33 @@ class LoginGUI extends JFrame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
 
-        btnLogin.addActionListener(event -> {
-            String user = txtUsername.getText();
-            String pass = txtPassword.getText();
-            Connection connection = null;
+        btnLogin.addActionListener(e -> DoLogin());
+    }
 
-            System.out.println(user + " " + pass);
+    public void DoLogin(){
+        String username = txtUsername.getText();
+        String password = txtPassword.getText(); // < - ENCRYPT THIS BWOIIIII
 
-            try {
-                connection = DriverManager.getConnection("jdbc:sqlite:TradingPlatform.db");
-                Statement statement = connection.createStatement();
-                statement.setQueryTimeout(30);
+        try (Connection connection = DriverManager.getConnection(Database.URL)) {
+            PreparedStatement getUser = connection.prepareStatement(Database.GetUserQuery);
+            getUser.setString(1, username);
+            getUser.setString(2, password);
+            ResultSet user = getUser.executeQuery();
 
-                PreparedStatement getUser = connection.prepareStatement("SELECT * FROM users WHERE username = ? AND password = ?");
-                getUser.setString(1, user);
-                getUser.setString(2, pass);
-                ResultSet res = getUser.executeQuery();
-
-                while (res.next()){
-                    System.out.println(res.getString("username"));
+            // Check user is valid
+            while (user.next()) {
+                if (username.equals(user.getString("username")) && password.equals(user.getString("password")))
+                {
+                    new TradingPlatformGUI(user);
+                    this.dispose();
                 }
+                else
+                    System.out.println("Invalid Username and or Password");
             }
-            catch (SQLException e) {
-                System.err.println(e.getMessage());
-            }
-            finally{
-                try {
-                    if (connection != null)
-                        connection.close();
-                }catch (SQLException e){
-                    System.err.println(e.getMessage());
-                }
-            }
-        });
+        }
+        catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public static void main(String[] args){
