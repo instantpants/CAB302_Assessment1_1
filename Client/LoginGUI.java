@@ -1,4 +1,6 @@
 import javax.swing.*;
+import java.awt.Toolkit;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -25,8 +27,9 @@ class LoginGUI extends JFrame
         lblUsername = new JLabel("Username ");
         lblPassword = new JLabel("Password ");
 
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         setSize(300, 200);
-        setLocation(500, 280);
+        setLocation(screenSize.width/2 - 150, screenSize.height/2 - 100);
         pnlLogin.setLayout(null);
 
         txtUsername.setBounds(80, 30, 150, 20);
@@ -49,6 +52,11 @@ class LoginGUI extends JFrame
             String user = txtUsername.getText();
             String pass = txtPassword.getText();
 
+            // Test functionality
+            if (user.equals("user") && pass.equals("pass")){
+                TradingPlatformGUI tradingPlatformGUI = new TradingPlatformGUI();
+            }
+
             /*
             ''Database query here''
 
@@ -59,5 +67,9 @@ class LoginGUI extends JFrame
             }
             */
         });
+    }
+
+    public static void main(String[] args){
+        LoginGUI loginGui = new LoginGUI();
     }
 }
