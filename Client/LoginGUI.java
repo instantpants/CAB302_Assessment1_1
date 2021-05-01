@@ -53,6 +53,17 @@ public class LoginGUI extends JFrame
     public void DoLogin(){
         String username = txtUsername.getText();
         String password = txtPassword.getText(); // < - ENCRYPT THIS BWOIIIII
+        ResultSet user = Database.DoLogin(username, password);
+        System.out.println(user);
+        if (user != null){
+            new TradingPlatformGUI(user);
+            this.dispose();
+        }
+    }
+
+    public void oDoLogin(){
+        String username = txtUsername.getText();
+        String password = txtPassword.getText(); // < - ENCRYPT THIS BWOIIIII
 
         try (Connection connection = DriverManager.getConnection(Database.URL)) {
             PreparedStatement getUser = connection.prepareStatement(Database.GetUserQuery);
