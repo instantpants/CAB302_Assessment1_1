@@ -54,8 +54,8 @@ public class LoginGUI extends JFrame
         String username = txtUsername.getText();
         String password = txtPassword.getText(); // < - ENCRYPT THIS BWOIIIII
         ResultSet user = Database.DoLogin(username, password);
-        System.out.println(user);
         if (user != null){
+            System.out.println(user);
             new TradingPlatformGUI(user);
             this.dispose();
         }
