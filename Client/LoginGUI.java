@@ -62,10 +62,12 @@ public class LoginGUI extends JFrame
 
             // Check user is valid
             while (user.next()) {
-                if (username.equals(user.getString("username")) && password.equals(user.getString("password")))
+                Boolean usernameMatches = username.equals(user.getString("username"));
+                Boolean passwordMatches = password.equals(user.getString("password"));
+                if (usernameMatches && passwordMatches)
                 {
                     new TradingPlatformGUI(user);
-                    this.dispose();
+                    this.dispose(); // Closes the LoginGUI
                 }
                 else
                     System.out.println("Invalid Username and or Password");
