@@ -13,7 +13,6 @@ public class TradingPlatformGUI extends JFrame
     JScrollPane scpListings;
     JTable tblListings;
 
-
     String[] columnNames = { "OU", "Asset Name", "Quantity", "Price", "Listing Type", "Date Added"};
 
     public TradingPlatformGUI(ResultSet user){

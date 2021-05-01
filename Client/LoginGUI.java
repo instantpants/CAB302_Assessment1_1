@@ -6,7 +6,6 @@ import Common.Database;
 
 public class LoginGUI extends JFrame
 {
-
     JButton btnLogin;
     JPanel pnlLogin;
     JTextField txtUsername;
