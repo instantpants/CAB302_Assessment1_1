@@ -27,6 +27,7 @@ public class ServerConnection
             statement.executeUpdate("DROP TABLE IF EXISTS users");
             statement.executeUpdate("DROP TABLE IF EXISTS ou");
             statement.executeUpdate("DROP TABLE IF EXISTS assets");
+            statement.executeUpdate("DROP TABLE IF EXISTS asset_list");
             statement.executeUpdate("DROP TABLE IF EXISTS listings");
             statement.executeUpdate("DROP TABLE IF EXISTS trade_history");
 
@@ -45,12 +46,18 @@ public class ServerConnection
                     ");"
             );
 
+            statement.executeUpdate("CREATE TABLE asset_list (" +
+                    "asset_name     TEXT    NOT NULL    PRIMARY KEY" +
+                    ");"
+            );
+
             statement.executeUpdate("CREATE TABLE assets (" +
                     "asset_name     TEXT    NOT NULL, " +
                     "ou_name        TEXT    NOT NULL," +
                     "quantity       INT     NOT NULL, " +
                     "" +
                     "PRIMARY KEY(asset_name, ou_name)" +
+                    "FOREIGN KEY(asset_name) REFERENCES asset_list(asset_name)" +
                     ");"
             );
 
@@ -85,12 +92,31 @@ public class ServerConnection
             statement.executeUpdate("INSERT INTO ou VALUES('Administration', 1000);");
             statement.executeUpdate("INSERT INTO ou VALUES('Management', 1000);");
             statement.executeUpdate("INSERT INTO ou VALUES('Support Staff', 1000);");
+            statement.executeUpdate("INSERT INTO ou VALUES('Compute Cluster', 1000);");
+
+            statement.executeUpdate("INSERT INTO asset_list VALUES('Logitech Mouse')");
+            statement.executeUpdate("INSERT INTO asset_list VALUES('Dell Computer Tower')");
+            statement.executeUpdate("INSERT INTO asset_list VALUES('Asus LCD Monitor')");
+            statement.executeUpdate("INSERT INTO asset_list VALUES('Cluster CPU Hour')");
+            statement.executeUpdate("INSERT INTO asset_list VALUES('Cluster GPU Hour')");
+            statement.executeUpdate("INSERT INTO asset_list VALUES('Microsoft Windows Licence')");
+            statement.executeUpdate("INSERT INTO asset_list VALUES('Adobe Photoshop Licence')");
+            statement.executeUpdate("INSERT INTO asset_list VALUES('Autodesk Pro Licence')");
 
             statement.executeUpdate("INSERT INTO assets VALUES('Logitech Mouse', 'IT Team', 10);");
             statement.executeUpdate("INSERT INTO assets VALUES('Dell Computer Tower', 'IT Team', 10);");
             statement.executeUpdate("INSERT INTO assets VALUES('Asus LCD Monitor', 'IT Team', 10);");
+            statement.executeUpdate("INSERT INTO assets VALUES('Cluster CPU Hour', 'Compute Cluster', 10);");
+            statement.executeUpdate("INSERT INTO assets VALUES('Cluster GPU Hour', 'Compute Cluster', 10);");
+            statement.executeUpdate("INSERT INTO assets VALUES('Microsoft Windows Licence', 'Management', 10);");
+            statement.executeUpdate("INSERT INTO assets VALUES('Microsoft Windows Licence', 'Support Staff', 10);");
+            statement.executeUpdate("INSERT INTO assets VALUES('Adobe Photoshop Licence', 'Support Staff', 10);");
 
             statement.executeUpdate("INSERT INTO listings VALUES(null, 'IT Team', 'Logitech Mouse', 5, 10, 1, '2021-04-30 10:30:00.000');");
+            statement.executeUpdate("INSERT INTO listings VALUES(null, 'Compute Cluster', 'Cluster CPU Hour', 10, 1, 1, '2021-05-04 12:45:00.000');");
+            statement.executeUpdate("INSERT INTO listings VALUES(null, 'Support Staff', 'Microsoft Windows Licence', 2, 25, 0, '2021-04-27 08:00:00.000');");
+
+            statement.executeUpdate("INSERT INTO trade_history VALUES(null, 'Support Staff', 'Microsoft Windows Licence', 5, 25, 0, '2021-04-20 08:00:00.000');");
 
             // PRINT ALL USERS
             ResultSet rs = statement.executeQuery("SELECT * FROM users");
